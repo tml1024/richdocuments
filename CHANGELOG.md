@@ -1,3 +1,10 @@
+**1.11.37**
+- Feature: Start listening for standard post messages and ignore deprecated ones
+- Feature: Add support for PutRelativeFile for Save As.
+
+**1.11.35**
+- Feature: Support for external apps. External apps can now generate a secret token to access richdocuments public API.
+
 **1.11.34**
 - Bug: Fix editing publicly shared documents
 - Bug: Delete creator/last modifier name from document templates
