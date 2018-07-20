@@ -1,8 +1,10 @@
 <?php
 /**
  * @copyright Copyright (c) 2016, ownCloud, Inc.
+ * @copyright Copyright (c) 2018, Collabora Productivity.
  *
  * @author Joas Schilling <coding@schilljs.com>
+ * @author Tor Lillqvist <tml@collabora.com>
  *
  * @license AGPL-3.0
  *
