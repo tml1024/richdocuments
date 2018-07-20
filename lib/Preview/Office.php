@@ -70,7 +70,6 @@ abstract class Office extends Provider {
 
 		if ($image->valid()) {
 			$image->scaleDownToFit($maxX, $maxY);
-
 			return $image;
 		}
 		return false;
