@@ -66,3 +66,9 @@ if ($wopiUrl !== '') {
 	$policy->addAllowedFrameDomain($wopiUrl);
 	$manager->addDefaultPolicy($policy);
 }
+
+\OC::$server->getLogger()->debug('Richdocuments app.php');
+$app = new Application();
+\OC::$server->getLogger()->debug('Richdocuments app.php... 2');
+$app->registerProvider();
+\OC::$server->getLogger()->debug('Richdocuments app.php... 3');

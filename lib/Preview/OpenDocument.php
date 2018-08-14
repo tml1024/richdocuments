@@ -29,11 +29,11 @@ class OpenDocument extends Office {
 	 * {@inheritDoc}
 	 */
 	public function getThumbnail($path, $maxX, $maxY, $scalingup, $fileview) {
-		// \OC::$server->getLogger()->debug('=== OpenDocument::getThumbnail: ' . $path);
+		\OC::$server->getLogger()->debug('=== OpenDocument::getThumbnail: ' . $path);
 
 		$fileInfo = $fileview->getFileInfo($path);
 		if (!$fileInfo) {
-			// \OC::$server->getLogger()->debug('... could not get file info');
+			\OC::$server->getLogger()->debug('... could not get file info');
 			return false;
 		}
 
@@ -43,23 +43,23 @@ class OpenDocument extends Office {
 		} else {
 			$fileName = $fileview->getLocalFile($path);
 		}
-		// \OC::$server->getLogger()->debug('... file name: ' . $fileName);
+		\OC::$server->getLogger()->debug('... file name: ' . $fileName);
 
 		$zip = new \ZipArchive();
-		// \OC::$server->getLogger()->debug('... created ZipArchive');
+		\OC::$server->getLogger()->debug('... created ZipArchive');
 
 		$res = $zip->open($fileName);
 
 		if ($res !== TRUE) {
-			// \OC::$server->getLogger()->debug('... could not open ' . $fileName);
+			\OC::$server->getLogger()->debug('... could not open ' . $fileName);
 			return false;
 		}
-		// \OC::$server->getLogger()->debug('... opened it');
+		\OC::$server->getLogger()->debug('... opened it');
 
 		$fp = $zip->getStream('Thumbnails/thumbnail.png');
 
 		if (!$fp) {
-			// \OC::$server->getLogger()->debug('... no thumbnail? falling back to asking Collabora Online');
+			\OC::$server->getLogger()->debug('... no thumbnail? falling back to asking Collabora Online');
 			return Office::getThumbnail($path, $maxX, $maxY, $scalingup, $fileview);
 		}
 
@@ -68,21 +68,21 @@ class OpenDocument extends Office {
 			$contents .= fread($fp, 10000);
 
 		fclose($fp);
-		// \OC::$server->getLogger()->debug('... read ' . strlen($contents) . ' bytes');
+		\OC::$server->getLogger()->debug('... read ' . strlen($contents) . ' bytes');
 
 		$image = new \OC_Image();
 		$image->loadFromData($contents);
-		// \OC::$server->getLogger()->debug('... created and loaded image');
+		\OC::$server->getLogger()->debug('... created and loaded image');
 
 		if ($image->valid()) {
-			// \OC::$server->getLogger()->debug('... scaling down');
+			\OC::$server->getLogger()->debug('... scaling down');
 			$image->scaleDownToFit($maxX, $maxY);
 
-			// \OC::$server->getLogger()->debug('... returning image');
+			\OC::$server->getLogger()->debug('... returning image');
 			return $image;
 		}
 
-		// \OC::$server->getLogger()->debug('... returning false');
+		\OC::$server->getLogger()->debug('... returning false');
 		return false;
 	}
 
