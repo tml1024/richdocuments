@@ -32,16 +32,11 @@ use \GuzzleHttp\Client;
 use \GuzzleHttp\Post\PostFile;
 
 abstract class Office extends Provider {
-	public function isAvailable(\OCP\Files\FileInfo $file): bool {
-		\OC::$server->getLogger()->debug('Richdocuments::Preview::Office::isAvailable: ' . $file->getMimetype());
-		return true;
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getThumbnail($path, $maxX, $maxY, $scalingup, $fileview) {
-		\OC::$server->getLogger()->debug('==== getThumbnail: ' . $path);
+		// \OC::$server->getLogger()->debug('==== getThumbnail: ' . $path);
 		$data = $fileview->file_get_contents($path);
 
 		$client = new Client(['base_uri' => 'http://localhost:9980/', 'timeout' => 2.0]);
@@ -55,7 +50,7 @@ abstract class Office extends Provider {
 
 			]);
 		$response = $client->send($request);
-
+/*
 		$headers = $response->getHeaders();
 
 		foreach ($headers as $key => $value) {
@@ -63,11 +58,11 @@ abstract class Office extends Provider {
 			foreach ($value as $vvalue) {
 				$concatvalue = $concatvalue . $vvalue;
 			}
-			\OC::$server->getLogger()->debug('==== response: ' . $key . ': ' . $concatvalue);
+			// \OC::$server->getLogger()->debug('==== response: ' . $key . ': ' . $concatvalue);
 		}
 
 		\OC::$server->getLogger()->debug('==== response body type: ' . gettype($response->getBody()));
-
+*/
 		$image = new \OC_Image();
 		$image->loadFromData($response->getBody());
 
